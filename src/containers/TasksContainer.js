@@ -22,7 +22,7 @@ class TasksContainer extends Component {
     return (
       <div>
         <div className="inputContainer">
-          <input className="taskInput" type="text" placeholder="Add a task" onKeyPress={this.createTodo} />
+          <input className="taskInput" type="text" placeholder="Add a task" />
         </div>  	    
         <div className="listWrapper">
 	        <ul className="taskList">
