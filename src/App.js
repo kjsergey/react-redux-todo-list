@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TasksContainer from './containers/TasksContainer'
+import LoginForm from './components/LoginForm/LoginForm'
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <div className="header">
         <h1>Todo List</h1>
       </div>
-      <TasksContainer />
+      <LoginForm />
     </div>
   );
 }
