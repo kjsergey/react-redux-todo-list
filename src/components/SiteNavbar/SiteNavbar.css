@@ -1,0 +1,19 @@
+.navbar-brand,
+.nav-link {
+  color: grey
+}
+
+.nav > .active , 
+.nav > .active:hover, 
+.nav > .active:focus {
+  color: grey;
+  background-color: rgb(35,77,130) !important;
+  background-image: none !important;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: white !important;
+}
