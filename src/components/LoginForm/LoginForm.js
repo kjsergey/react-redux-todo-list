@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { authenticated, unauthenticated } from '../../actions/actionCreators'
-import 'bootstrap/dist/css/bootstrap.css';
 import API from '../../utils/API';
 import history from '../../history';
-import { Alert, Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import './LoginForm.css'
+import { Alert, Button, FormGroup, Input, Label } from 'reactstrap';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const LoginForm = () => {
       .then(response => {
         dispatch(authenticated());
         localStorage.setItem('jwt', response.data.jwt);
+        setPassword('');
         history.push('/');
       })
       .catch(error => {
@@ -29,30 +31,31 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="Login">              
+    <div className="LoginForm">              
       <form onSubmit={handleSubmit}>
         {authError !== undefined && 
           <FormGroup bssize="large">
-              <Alert variant="danger">
+              <Alert color="danger">
                 <strong>{authError}</strong>
               </Alert>                        
           </FormGroup>
         }
-        <FormGroup controlId="email" bssize="large">
-          <FormLabel>Email</FormLabel>
-          <FormControl
+        <FormGroup controlid="email" bssize="large">
+          <Label>Email</Label>
+          <Input
               autoFocus
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
           />
         </FormGroup>
-        <FormGroup controlId="password" bssize="large">
-          <FormLabel>Password</FormLabel>
-          <FormControl
+        <FormGroup controlid="password" bssize="large">
+          <Label>Password</Label>
+          <Input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
+              autoComplete="true"
           />
         </FormGroup>
         <Button block bssize="large" disabled={!validateForm()} type="submit">
