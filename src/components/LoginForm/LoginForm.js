@@ -8,7 +8,7 @@ import { Alert, Button, FormGroup, FormControl, FormLabel } from 'react-bootstra
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth.error, shallowEqual);
+  const authError = useSelector(state => state.auth.error, shallowEqual);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,14 +24,20 @@ const LoginForm = () => {
         history.push('/');
       })
       .catch(error => {
-        dispatch(unauthenticated('Login failed'));
-        setTimeout(() => console.log(auth), 3000);
+        dispatch(unauthenticated(error.response.data.errors.slice(-1)[0].detail));
       })
   }
 
   return (
-    <div className="Login">                
+    <div className="Login">              
       <form onSubmit={handleSubmit}>
+        {authError !== undefined && 
+          <FormGroup bssize="large">
+              <Alert variant="danger">
+                <strong>{authError}</strong>
+              </Alert>                        
+          </FormGroup>
+        }
         <FormGroup controlId="email" bssize="large">
           <FormLabel>Email</FormLabel>
           <FormControl
@@ -51,7 +57,6 @@ const LoginForm = () => {
         </FormGroup>
         <Button block bssize="large" disabled={!validateForm()} type="submit">
           Login
-          {error}
         </Button>
       </form>
     </div>
