@@ -21,7 +21,7 @@ const LoginForm = () => {
       API.post('users/login', {email: email, password: password})
       .then(response => {
         dispatch(authenticated());
-        localStorage.setItem('jwt', response.data.jwt);
+        localStorage.setItem('jwt', response.data.meta.token);
         setPassword('');
         history.push('/');
       })
