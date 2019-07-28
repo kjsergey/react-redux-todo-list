@@ -20,8 +20,8 @@ const RegistrationForm = () => {
       e.preventDefault();
       API.post('users/registration', {email: email, password: password, password_confirmation: passwordConfirmation})
       .then(response => {
+        localStorage.setItem('jwt', response.data.meta.token);
         dispatch(authenticated());
-        localStorage.setItem('jwt', response.data.jwt);
         setPassword('');
         setPasswordConfirmation('');
         history.push('/');
