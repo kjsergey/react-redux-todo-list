@@ -3,6 +3,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { authenticated, unauthenticated } from '../../actions/actionCreators'
 import API from '../../utils/API';
 import history from '../../history';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import './RegistrationForm.css'
 import { Alert, Button, FormGroup, Input, Label } from 'reactstrap';

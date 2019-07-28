@@ -23,10 +23,10 @@ const todosReducer = (state = [], action) => {
       return state.map(task => (task.id === action.id) ? {...task, important: !task.important} : task);
 
     case DELETE_TASK:
-        return state.filter(task => task.id !== action.id);
+      return state.filter(task => task.id !== action.id);
 
     default:
-        return state;    
+      return state;    
   }
 }
 

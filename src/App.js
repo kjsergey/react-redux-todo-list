@@ -5,6 +5,7 @@ import SiteNavbar from './components/SiteNavbar'
 import LoginForm from './components/LoginForm'
 import RegistrationForm from './components/RegistrationForm'
 import Logout from './components/Logout'
+import TodoList from './components/TodoList/TodoList';
 
 import './App.css';
 
@@ -14,7 +15,7 @@ function App() {
       <Fragment>
         <SiteNavbar />
         <Switch>
-          <Route exact path='/' component={LoginForm} />
+          <Route exact path='/' component={TodoList} />
           <Route path="/login/" component={LoginForm} />
           <Route path="/signup/" component={RegistrationForm} />
           <Route path="/logout/" component={Logout} />
