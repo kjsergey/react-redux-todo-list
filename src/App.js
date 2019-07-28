@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import history from './history';
 import SiteNavbar from './components/SiteNavbar'
 import LoginForm from './components/LoginForm'
+import RegistrationForm from './components/RegistrationForm'
 import Logout from './components/Logout'
 
 import './App.css';
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={LoginForm} />
           <Route path="/login/" component={LoginForm} />
+          <Route path="/signup/" component={RegistrationForm} />
           <Route path="/logout/" component={Logout} />
         </Switch>
       </Fragment>

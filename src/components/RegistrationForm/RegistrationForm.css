@@ -1,0 +1,16 @@
+@media all and (min-width: 480px) {
+	.RegistrationForm {
+	  padding: 60px 0;
+	}
+  
+	.RegistrationForm form {
+	  margin: 0 auto;
+	  max-width: 320px;
+	}
+	.RegistrationForm p {
+	  margin: 0 auto;
+      max-width: 320px;
+      color: red;
+      text-align: center;
+    }
+}
