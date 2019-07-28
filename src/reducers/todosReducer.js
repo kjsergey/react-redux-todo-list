@@ -22,8 +22,8 @@ const todosReducer = (state = [], action) => {
     case TOGGLE_TASK_IMPORTANT:
       return state.map(task => (task.id === action.id) ? {...task, important: !task.important} : task);
 
-    case DELETE_TODO:
-        return state.filter(tasks => task.id !== action.id);
+    case DELETE_TASK:
+        return state.filter(task => task.id !== action.id);
 
     default:
         return state;    
