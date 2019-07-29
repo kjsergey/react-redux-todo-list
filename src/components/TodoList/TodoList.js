@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { loadTasks } from '../../actions/actionCreators'
+import { loadTasks, deleteTask } from '../../actions/actionCreators'
 import API from '../../utils/API';
 import history from '../../history';
-import { getAuthHeader } from '../../helpers/requestHelper';
-// import TodoListItem from '../TodoListItem';
+import { getAuthHeader, handleError } from '../../helpers/requestHelper';
+import TodoListItem from '../TodoListItem';
 
 import './TodoList.css';
 
@@ -17,24 +17,37 @@ const TodoList = () => {
     if (!authenticated) {
       return history.push('/login');
     }
-    
-    const config = getAuthHeader()
+
+    const config = getAuthHeader();
 
     API.get('tasks', config)
     .then(response => {
-      dispatch(loadTasks(response.data));
+      dispatch(loadTasks(response.data.data));
     })
     .catch(error => {
-      (error.response.status === 401) ? history.push('/logout') : console.log(error);
+      handleError(error, history);
     })
   }, [authenticated, dispatch]);
+
+  const deleteTask = (id) => {
+    const config = getAuthHeader();
+
+    API.delete(`tasks/${id}`, config)
+    .then(response => {
+      dispatch(deleteTask(id));
+    })
+    .catch(error => {
+      handleError(error, history);
+    })
+  }
 
   const elements = tasks.map((task) => {
     return (
       <li key={task.id} className="list-group-item">
-        {/* <TodoListItem
-          { ...task }
-        /> */}
+        <TodoListItem
+          { ...task.attributes }
+          onDelete={ () => deleteTask(task.id) } 
+        />
       </li>
     );
   });
