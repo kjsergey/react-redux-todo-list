@@ -29,7 +29,7 @@ const TodoList = () => {
     })
   }, [authenticated, dispatch]);
 
-  const deleteTask = (id) => {
+  const onDeleteTask = (id) => {
     const config = getAuthHeader();
 
     API.delete(`tasks/${id}`, config)
@@ -46,7 +46,7 @@ const TodoList = () => {
       <li key={task.id} className="list-group-item">
         <TodoListItem
           { ...task.attributes }
-          onDelete={ () => deleteTask(task.id) } 
+          onDelete={ () => onDeleteTask(task.id) } 
         />
       </li>
     );
