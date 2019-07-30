@@ -22,7 +22,10 @@ const TodoList = () => {
 
     API.get('tasks', config)
     .then(response => {
-      dispatch(loadTasks(response.data.data));
+      const todos = response.data.data.map(({id, attributes}) => {
+        return {id, ...attributes}
+      });
+      dispatch(loadTasks(todos));
     })
     .catch(error => {
       handleError(error, history);
@@ -45,7 +48,7 @@ const TodoList = () => {
     return (
       <li key={task.id} className="list-group-item">
         <TodoListItem
-          { ...task.attributes }
+          { ...task }
           onDelete={ () => onDeleteTask(task.id) } 
         />
       </li>
