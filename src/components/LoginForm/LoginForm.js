@@ -6,7 +6,7 @@ import history from '../../history';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './LoginForm.css'
-import { Alert, Button, FormGroup, Input, Label } from 'reactstrap';
+import { UncontrolledAlert, Button, FormGroup, Input, Label } from 'reactstrap';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -36,9 +36,9 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit}>
         {authError !== undefined && 
           <FormGroup bssize="large">
-              <Alert color="danger">
+              <UncontrolledAlert color="danger">
                 <strong>{authError}</strong>
-              </Alert>                        
+              </UncontrolledAlert>                        
           </FormGroup>
         }
         <FormGroup controlid="email" bssize="large">

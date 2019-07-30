@@ -15,14 +15,12 @@ const TodoListItem = ({id, name, onDelete}) => {
       <button type="button"
               className="btn btn-outline-success btn-sm float-right" >
         <FontAwesomeIcon icon={faExclamation} />
-
       </button>
 
       <button type="button"
               className="btn btn-outline-danger btn-sm float-right"
               onClick={onDelete}>
         <FontAwesomeIcon icon={faTrash} />
-
       </button>
     </span>
   );

@@ -7,5 +7,9 @@ export function getAuthHeader() {
 }
 
 export function handleError(error, history) {
-  (error.response.status === 401) ? history.push('/logout') : console.log(error);
+  if (error.response && error.response.status === 401) {
+    history.push('/logout')
+  } else {
+    console.log(error);
+  }
 }
