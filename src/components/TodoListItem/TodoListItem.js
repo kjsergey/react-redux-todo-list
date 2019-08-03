@@ -1,11 +1,19 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { removeTask } from '../../actions/actionCreators'
 
 import { faTrash, faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import './TodoListItem.css';
 
-const TodoListItem = ({id, name, onDelete}) => {
+const TodoListItem = ({id, name, done, important}) => {
+  const dispatch = useDispatch();
+
+  const onDelete = () =>{
+    dispatch(removeTask(id));
+  }
+
   return (
     <span className="todo-list-item">
       <span
