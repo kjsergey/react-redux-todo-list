@@ -11,14 +11,14 @@ export const fetchTasks = () => (dispatch) => {
     const tasks = response.data.data.map(({id, attributes}) => {
       return {id, ...attributes}
     });
-    dispatch(loadTasks(tasks));
+    dispatch(loadedTasks(tasks));
   })
   .catch(error => {
     handleError(error, history);
   });
 }
 
-export const loadTasks = (tasks) => {
+export const loadedTasks = (tasks) => {
   return {
     type: actions.LOAD_TASKS,
     tasks: tasks
@@ -31,7 +31,7 @@ export const createTask = (taskName) => (dispatch) => {
   API.post('tasks', {name: taskName}, config)
   .then(response => {
     const {data: {data: {id, attributes:{name}}}} = response;
-    dispatch(addTask(id, name));
+    dispatch(addedTask(id, name));
   })
   .catch(error => {
     if (error.response && error.response.status === 401) {
@@ -44,15 +44,39 @@ export const createTask = (taskName) => (dispatch) => {
   })
 }
 
-export const addTask = (id, name) => {
+export const addedTask = (id, name) => {
   return { type: actions.ADD_TASK, id: id, name: name }
 }
 
-export const toggleTaskDone = (id) => {
+export const toggleTaskDone = (id, done) => (dispatch) => {
+  const config = getAuthHeader();
+  
+  API.patch(`tasks/${id}`, {done: !done}, config)
+  .then(response => {
+    dispatch(toggledTaskDone(id));
+  })
+  .catch(error => {
+    handleError(error, history);
+  })
+}
+
+export const toggledTaskDone = (id) => {
   return { type: actions.TOGGLE_TASK_DONE, id: id }
 }
 
-export const toggleTaskImportant = (id) => {
+export const toggleTaskImportant = (id, important) => (dispatch) => {
+  const config = getAuthHeader();
+  
+  API.patch(`tasks/${id}`, {important: !important}, config)
+  .then(response => {
+    dispatch(toggledTaskImportant(id));
+  })
+  .catch(error => {
+    handleError(error, history);
+  })
+}
+
+export const toggledTaskImportant = (id) => {
   return { type: actions.TOGGLE_TASK_IMPORTANT, id: id }
 }
 
@@ -61,14 +85,14 @@ export const removeTask = (id) => (dispatch) => {
 
   API.delete(`tasks/${id}`, config)
   .then(response => {
-    dispatch(deleteTask(id));
+    dispatch(deletedTask(id));
   })
   .catch(error => {
     handleError(error, history);
   })
 }
 
-export const deleteTask = (id) => {
+export const deletedTask = (id) => {
   return { type: actions.DELETE_TASK, id: id }
 }
 

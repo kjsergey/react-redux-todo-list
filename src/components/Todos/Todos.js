@@ -1,14 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import TodoList from '../TodoList';
 import ItemAddForm from '../ItemAddForm';
 
+import './Todos.css';
 
 const Todos = () => {
   return (
-    <Fragment>
+    <div className='todo-app'>
       <ItemAddForm />
       <TodoList />
-    </Fragment>
+    </div>
   );
 }
 
