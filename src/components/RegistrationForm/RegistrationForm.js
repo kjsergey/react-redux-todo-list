@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import { authenticated, unauthenticated } from '../../actions/actionCreators'
-import API from '../../utils/API';
-import history from '../../history';
+import { registration } from '../../actions/actionCreators'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './RegistrationForm.css'
@@ -18,18 +16,10 @@ const RegistrationForm = () => {
   const validateForm = () => email.length > 0 && password.length > 0 && passwordConfirmation;
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      API.post('users/registration', {email: email, password: password, password_confirmation: passwordConfirmation})
-      .then(response => {
-        localStorage.setItem('jwt', response.data.meta.token);
-        dispatch(authenticated());
-        setPassword('');
-        setPasswordConfirmation('');
-        history.push('/');
-      })
-      .catch(error => {
-        dispatch(unauthenticated(error.response.data.errors.slice(-1)[0].detail));
-      })
+    e.preventDefault();
+    dispatch(registration({email: email, password: password, password_confirmation: passwordConfirmation}));
+    setPassword('');
+    setPasswordConfirmation('');
   }
 
   return (

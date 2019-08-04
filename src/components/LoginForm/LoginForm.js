@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import { authenticated, unauthenticated } from '../../actions/actionCreators'
-import API from '../../utils/API';
-import history from '../../history';
+import { login} from '../../actions/actionCreators'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './LoginForm.css'
@@ -18,17 +16,9 @@ const LoginForm = () => {
   const validateForm = () => email.length > 0 && password.length > 0;
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      API.post('users/login', {email: email, password: password})
-      .then(response => {
-        dispatch(authenticated());
-        localStorage.setItem('jwt', response.data.meta.token);
-        setPassword('');
-        history.push('/');
-      })
-      .catch(error => {
-        dispatch(unauthenticated(error.response.data.errors.slice(-1)[0].detail));
-      })
+    e.preventDefault();
+    dispatch(login({email: email, password: password}));
+    setPassword('');
   }
 
   return (
