@@ -13,7 +13,8 @@ function App() {
       <Fragment>
         <SiteNavbar />
         <Switch>
-          <Route exact path='/:filter?' render={props => <Todos {...props} />} />
+          <Route exact path='/' component={Todos} />
+          <Route path='/app/:filter?' render={props => <Todos {...props} />} />
           <Route path="/login/" component={LoginForm} />
           <Route path="/signup/" component={RegistrationForm} />
           <Route path="/logout/" component={Logout} />

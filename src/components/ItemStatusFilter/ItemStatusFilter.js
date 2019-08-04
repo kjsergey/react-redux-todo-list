@@ -16,7 +16,7 @@ const ItemStatusFilter = ({filter}) => {
     const classNames = 'btn btn-filter ' + (isActive ? 'btn-info' : 'btn-outline-secondary');
 
     return (
-      <Link to={name} key={name}>
+      <Link to={`/app/${name}`} key={name}>
         <button type="button" className={classNames}>
           {label}
         </button>

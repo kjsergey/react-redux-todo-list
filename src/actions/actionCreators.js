@@ -108,6 +108,30 @@ export const deletedTask = (id) => {
   return { type: actions.DELETE_TASK, id: id }
 }
 
+export const login = (data) => (dispatch) => {
+  API.post('users/login', data)
+  .then(response => {
+    dispatch(authenticated());
+    localStorage.setItem('jwt', response.data.meta.token);
+    history.push('/');
+  })
+  .catch(error => {
+    dispatch(unauthenticated(error.response.data.errors.slice(-1)[0].detail));
+  })
+}
+
+export const registration = (data) => (dispatch) => {
+  API.post('users/registration', data)
+  .then(response => {
+    localStorage.setItem('jwt', response.data.meta.token);
+    dispatch(authenticated());
+    history.push('/');
+  })
+  .catch(error => {
+    dispatch(unauthenticated(error.response.data.errors.slice(-1)[0].detail));
+  })
+}
+
 export const authenticated = () => {
   return {
     type: actions.AUTHENTICATED
