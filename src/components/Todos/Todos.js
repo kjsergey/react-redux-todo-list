@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TodoList from '../TodoList';
 import ItemAddForm from '../ItemAddForm';
 import ItemStatusFilter from '../ItemStatusFilter';
@@ -14,5 +15,9 @@ const Todos = ({match}) => {
     </div>
   );
 }
+
+Todos.propTypes = {
+  match: PropTypes.object
+};
 
 export default Todos;

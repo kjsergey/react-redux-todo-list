@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
 import { removeTask, toggleTaskDone, toggleTaskImportant } from '../../actions/actionCreators'
+import PropTypes from 'prop-types';
 
 import { faTrash, faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import './TodoListItem.css';
 
 const TodoListItem = ({id, name, done, important}) => {
@@ -50,5 +50,15 @@ const TodoListItem = ({id, name, done, important}) => {
     </span>
   );
 }
+
+TodoListItem.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired
+  ]),
+  name: PropTypes.string.isRequired,
+  done: PropTypes.bool.isRequired,
+  important: PropTypes.bool.isRequired
+};
 
 export default TodoListItem;

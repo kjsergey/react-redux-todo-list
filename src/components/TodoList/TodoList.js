@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchTasks } from '../../actions/actionCreators'
 import history from '../../history';
@@ -26,6 +27,10 @@ const TodoList = ({filter}) => {
   });
 
   return (<ul className="todo-list list-group">{ elements }</ul>);
+};
+
+TodoList.propTypes = {
+  filter: PropTypes.string
 };
 
 export default TodoList;
