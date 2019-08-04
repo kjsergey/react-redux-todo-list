@@ -6,14 +6,14 @@ import TodoListItem from '../TodoListItem';
 
 import './TodoList.css';
 
-const TodoList = () => {
+const TodoList = ({filter}) => {
   const dispatch = useDispatch();
   const authenticated = useSelector(state => state.auth.authenticated);
   const tasks = useSelector(state => state.todos)
 
   useEffect(() => {
-    authenticated ? dispatch(fetchTasks()) : history.push('/login');
-  }, [authenticated, dispatch]);
+    authenticated ? dispatch(fetchTasks(filter)) : history.push('/login');
+  }, [authenticated, dispatch, filter]);
 
   const elements = tasks.map((task) => {
     return (
