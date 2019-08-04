@@ -3,10 +3,22 @@ import API from '../utils/API';
 import { getAuthHeader, handleError } from '../helpers/requestHelper';
 import history from '../history';
 
-export const fetchTasks = () => (dispatch) => {
+export const fetchTasks = (filter) => (dispatch) => {
+  let filterParam;
   const config = getAuthHeader();
 
-  API.get('tasks', config)
+  switch (filter) {
+    case 'active':
+      filterParam = '?done=false';
+      break;
+    case 'done':
+      filterParam = '?done=true';
+      break;
+    default:
+      filterParam = '';
+  }
+
+  API.get(`tasks${filterParam}`, config)
   .then(response => {
     const tasks = response.data.data.map(({id, attributes}) => {
       return {id, ...attributes}
