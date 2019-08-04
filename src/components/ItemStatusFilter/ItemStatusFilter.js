@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import './ItemStatusFilter.css';
@@ -28,6 +29,10 @@ const ItemStatusFilter = ({filter}) => {
       { buttons }
     </div>
   );
+};
+
+ItemStatusFilter.propTypes = {
+  filter: PropTypes.string
 };
 
 export default ItemStatusFilter;

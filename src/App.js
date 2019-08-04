@@ -7,8 +7,6 @@ import RegistrationForm from './components/RegistrationForm'
 import Logout from './components/Logout'
 import Todos from './components/Todos';
 
-import './App.css';
-
 function App() {
   return (
     <Router history={history}>
